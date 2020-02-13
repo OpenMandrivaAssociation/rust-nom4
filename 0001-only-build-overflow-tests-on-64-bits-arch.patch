@@ -1,0 +1,23 @@
+From b16bbf3ff43af544ae03c8575945770f19f1d2cb Mon Sep 17 00:00:00 2001
+From: Geoffroy Couprie <geo.couprie@gmail.com>
+Date: Mon, 24 Jun 2019 11:52:09 +0200
+Subject: [PATCH] only build overflow tests on 64 bits arch
+
+---
+ tests/overflow.rs | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tests/overflow.rs b/tests/overflow.rs
+index 5656f8a..2f4a87f 100644
+--- a/tests/overflow.rs
++++ b/tests/overflow.rs
+@@ -1,4 +1,6 @@
+ #![cfg_attr(feature = "cargo-clippy", allow(unreadable_literal))]
++#![cfg(target_pointer_width = "64")]
++
+ #[macro_use]
+ extern crate nom;
+ 
+-- 
+2.22.0
+

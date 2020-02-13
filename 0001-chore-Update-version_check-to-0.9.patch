@@ -1,0 +1,35 @@
+From 28d7efe4dfa9b0b87bc09094ec5b029873a8f8f5 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Tue, 26 Nov 2019 10:55:53 +0100
+Subject: [PATCH] chore: Update version_check to 0.9
+
+Also simplify build.rs.
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ build.rs | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/build.rs b/build.rs
+index c3cecbd..f612ce2 100644
+--- a/build.rs
++++ b/build.rs
+@@ -1,13 +1,7 @@
+ extern crate version_check;
+ 
+ fn main() {
+-  match version_check::is_min_version("1.26.0") {
+-    Some((true, _actual_version)) => {
+-      println!("cargo:rustc-cfg=stable_i128");
+-    }
+-    Some(_) => (),
+-    None => {
+-      eprintln!("couldn't query version info from rustc");
+-    }
++  if version_check::is_min_version("1.26.0").unwrap_or(true) {
++    println!("cargo:rustc-cfg=stable_i128");
+   }
+ }
+-- 
+2.24.0
+
